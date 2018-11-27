@@ -27,19 +27,457 @@ body.home
 	position: relative
 	line-height: 1.65
 	font-family: $default-font
-	display: flex
-	flex-direction: column
-	height: 100vh
 	overflow-x: hidden
 	input, textarea
-			border: #666 1px solid
 			outline: none
 			&:focus:required:invalid
 				border-color: red
 			&:required:valid
 				border-color: green
-
 +reset()
+.container
+	+wrapper()
+
+/*HEADER*/
+.main-header
+	position: relative
+	width: 100%
+	padding-bottom: 100px
+	background-image: url('../img/content/bg/main-bg.jpg')
+	background-repeat: no-repeat
+	background-size: cover
+	background-position: center center
+	background-attachment: fixed
 
 
+	&::after
+		position: absolute
+		content: ''
+		background-color: rgba(#000, 0.45)
+		width: 100%
+		height: 100%
+		top: 0
+		left: 0
+.top-line
+	position: relative
+	z-index: 5
+	background-color: #fff
+	transition: all .35s ease
+	border-bottom: 2px solid #e5e5e5
+	&--fixed
+		position: fixed
+		top: 0
+		left: 0
+		right: 0
+		.logo
+			img
+				width: 100px
+				transition: all .35s ease
+.top-llne__wrapper
+	display: flex
+	justify-content: space-between
+	align-items: center
+	min-height: 50px
+.logo
+	text-decoration: none
+	color: #333
+	img
+		width: 125px
+		transition: all .25s ease
+		display: block
+.toggle-menu
+	position: relative
+	display: flex
+	flex-direction: column
+	justify-content: center
+	align-items: flex-end
+	//margin-left: auto
+	cursor: pointer
+	z-index: 100
+	width: 25px
+	height: 25px
+	//padding: 15px
+	&__row
+		height: 2px
+		width: 25px
+		margin: 2px 0
+		background-color: #000
+		position: relative
+		transition: all .5s
+		&:nth-child(2)
+			width: 19px
+		&:nth-child(3)
+			width: 13px
+.toggle-menu.toggle-menu--active .toggle-menu__row
+	background-color: #000
+.toggle-menu.toggle-menu--active .toggle-menu__row:first-child 
+	transform: rotate(-135deg)
+	top: 6px
+	width: 100%
+.toggle-menu.toggle-menu--active .toggle-menu__row:last-child 
+	transform: rotate(-225deg)
+	top: -6px
+	width: 100%
+.toggle-menu.toggle-menu--active .toggle-menu__row:nth-child(2) 
+	opacity: 0
+.menu
+	position: fixed
+	right: 0
+	top: 0
+	display: flex
+	align-items: center
+	justify-content: center
+	width: 26%
+	height: 100%
+	transform: translateX(100%)
+	transition: transform .5s ease
+	background-color: #fff
+	z-index: 2
+	+md-block()
+		width: 35%
+	+tablet-block()
+		width: 100%
+	&--active
+		transform: translateX(0%)
+		transition: transform .5s ease
+		.main-menu li:nth-child(1) a
+			animation-delay: .2s
+		.main-menu li:nth-child(2) a
+			animation-delay: .3s
+		.main-menu li:nth-child(3) a
+			animation-delay: .4s
+		.main-menu li:nth-child(4) a
+			animation-delay: .5s
+.main-navigation
+	width: 100%
+.main-menu
+	width: 100%
+	text-align: center
+	li
+		margin: 50px 0
+		+tablet-block()
+			margin: 35px 0
+	a
+		display: block
+		color: #000
+		font-size: 42px
+		transition: transform .25s ease
+		opacity: 0
+		text-decoration: none
+		letter-spacing: 2.3px
+		transition: color .5s ease, opacity 5s ease
+		+md-block()
+			font-size: 36px
+		+tablet-block()
+		span
+			position: relative
+			transition: color .25s ease
+			&::before, &::after
+				position: absolute
+				content: ''
+			&::before
+				left: 0
+				bottom: 0
+				transform: scale(0)
+				width: 0%
+				height: 2px
+				background-color: $accent
+		&:hover
+			span
+				position: relative
+				color: $accent
+				transition: color .25s ease
+				//&::before
+					//transform: scale(1)
+					//width: 100%
+					//transition: width .25s ease
+
+/*HEADER*/
+/*FadeInUp*/
+
+.animated
+	animation-duration: 1s
+	animation-fill-mode: both
+.animatedFadeInUp
+	opacity: 0
+.fadeInUp
+	opacity: 0
+	animation-name: fadeInUp
+/*FadeInUp*/
+.intro
+	position: relative
+	z-index: 1
+	text-align: center
+	color: #fff
+	margin-top: 30px
+	padding: 0 10px
+	&__title
+		font-size: 54px
+		letter-spacing: 4.2px
+		font-family: $OpenSansBold
+		+md-block()
+			font-size: 44px
+			letter-spacing: 3px
+		+tablet-block()
+			font-size: 36px
+		+tabletx-block()
+			font-size: 30px
+		+phone-block()
+			font-size: 27px
+	&__text
+		position: relative
+		font-size: 18px
+		letter-spacing: 0.5px
+		display: inline-block
+		+md-block()
+			font-size: 16px
+		+tablet-block()
+			font-size: 14px
+		&::after
+			position: absolute
+			content: ''
+			left: 50%
+			transform: translateX(-50%)
+			bottom: -20px
+			height: 4px
+			width: 60px
+			background-color: $accent
+
+.language-switch
+	display: flex
+	margin-right: 45px
+	+phone-block()
+		margin-right: 0px
+	li
+		&:nth-child(1)
+			margin-right: 15px
+		&.active
+			a
+				transition: opacity .25s ease
+				opacity: 1
+	a
+		display: block
+		width: 25px
+		height: 15px
+		opacity: .4
+		transition: opacity .25s ease
+		img
+			display: block
+/*GOOGLE MAP*/
+.s-contacts
+	position: relative
+#google-container
+	height: 600px
+.contacts-triangle
+	position: absolute
+	top: 0
+	z-index: 1
+	width: 100%
+	height: 120px
+	transform: rotate(180deg)
+/*GOOGLE MAP*/
+/*s-about*/
+.s-about
+	position: relative
+	width: 100%
+	min-height: 600px
+	background-color: red
+/*s-about*/
+/*search*/
+.search
+	margin-left: auto
+	margin-right: 25px
+	+phone-block()
+		display: none
+	a
+		text-decoration: none
+		display: block
+		.fa-search
+			font-size: 18px
+			color: #333
+			transition: color .25s ease
+			&:hover
+				color: $accent
+				transition: color .25s ease
+/*search*/
+/*search-overlay*/
+.search-overlay
+	position: fixed
+	display: none
+	top: 0
+	right: 0
+	width: 100%
+	height: 100vh
+	z-index: 101
+	background-color: darken($accent, 20%)
+	&__close
+		position: absolute
+		right: 20px
+		top: 20px
+		padding: 15px
+		cursor: pointer
+		background-color: transparent
+		border: none
+		opacity: .8
+		transition: opacity .25s ease
+		&:hover
+			opacity: 1
+			transition: opacity .25s ease
+		.fa-times
+			font-size: 25px
+			color: #fff
+.search-form
+	position: absolute
+	padding: 0 50px
+	width: 100%
+	top: 50%
+	transform: translateY(-50%)
+.form-search
+	position: relative
+	z-index: 1
+	&__input
+		text-transform: uppercase
+		border: 0
+		background: transparent
+		border-bottom: 1px solid #fff
+		text-align: center
+		width: 100%
+		cursor: text
+		font-size: 60px
+		letter-spacing: 1.2px
+		padding: 0 110px 5px 50px
+		color: #fff
+		+placeholder()
+			letter-spacing: 4.5px
+			color: #fff
+	&__find
+		display: none
+		position: absolute
+		border: none
+		background: transparent
+		right: 0
+		opacity: .8
+		min-width: 100px
+		min-height: 70px
+		padding: 10px
+		top: 50%
+		color: #fff
+		text-transform: uppercase
+		letter-spacing: 4.5px
+		outline: none
+		transform: translateY(-50%)
+		cursor: pointer
+		transition: opacity .25s ease
+		&:hover
+			opacity: 1
+			transition: opacity .25s ease
+
+/*search-overlay*/
+/*posts*/
+.posts-list
+	position: relative
+	z-index: 1
+	margin-top: 50px
+	&__wrapper
+		display: flex
+		+tablet-block()
+			flex-direction: column
+		.first-line
+			flex: 1
+			+tablet-block()
+				margin-bottom: 20px
+		.post
+			position: relative
+			background-color: #fff
+			border-radius: 4px
+			height: 100%
+			display: flex
+			flex-direction: column
+			+tablet-block()
+				width: 82%
+				margin: 0 auto
+			+tabletx-block()
+				width: 90%
+			+phone-block()
+				width: 100%
+			a
+				position: relative
+				display: block
+				overflow: hidden
+				img
+					position: relative
+					z-index: 5
+					overflow: hidden
+					display: block
+					width: 100%
+					//height: 250px
+					transition: transform .35s ease-in-out
+					&:hover
+						transform: scale(1.2)
+						transition: transform .35s ease-in-out
+					+tablet-block()
+						height: 250px
+					+phone-block()
+						height: 180px
+			&-footer
+				margin-top: auto
+				padding: 10px 20px
+			&-content
+				padding: 20px
+				a
+					text-decoration: none
+					color: inherit
+					display: inline-block
+					transition: color .25s ease
+					&:hover
+						color: $accent
+						transition: color .25s ease
+				h2
+					font-family: $OpenSansBold
+					font-size: 26px
+					line-height: 1.2
+					margin-bottom: 10px
+					+phone-block()
+						font-size: 22px
+				p
+					font-size: 14px
+					color: #333
+					opacity: .9
+					letter-spacing: 0.4px
+			&-footer
+				display: flex
+				border-top: 1px solid #ccc
+				align-items: center
+				justify-content: space-between
+				p
+					font-size: 12px
+					color: #333
+					opacity: .8
+					letter-spacing: 0.6px
+.second-line
+	display: flex
+	flex-direction: column
+	flex: 1
+	margin-left: 20px
+	margin-right: 20px
+	.post
+		position: relative
+		&:first-child
+			margin-bottom: 20px
+		img
+			height: 180px
+	+tablet-block()
+		margin-left: 0
+		margin-right: 0
+.third-line
+	flex: 0.8
+	+md-block()
+		display: none
+/*posts*/
+@keyframes fadeInUp
+	0%
+		transform: translate3d(0,40px,0)
+	100%
+		transform: translate3d(0,0,0)
+		opacity: 1
 @import "media"

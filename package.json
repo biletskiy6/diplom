@@ -12,7 +12,7 @@
   "devDependencies": {
     "browser-sync": "^2.24.7",
     "del": "^3.0.0",
-    "gulp": "github:gulpjs/gulp#4.0",
+    "gulp": "github:gulpjs/gulp",
     "gulp-autoprefixer": "^6.0.0",
     "gulp-cheerio": "^0.6.3",
     "gulp-concat": "^2.6.1",
@@ -38,6 +38,7 @@
     "normalize.css": "^8.0.0",
     "picturefill": "^3.0.2",
     "slick-carousel": "^1.8.1",
-    "svg4everybody": "^2.1.9"
+    "svg4everybody": "^2.1.9",
+    "vide": "^0.5.1"
   }
 }

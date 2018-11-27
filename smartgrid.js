@@ -6,17 +6,13 @@ var settings = {
     offset: '30px', 
     mobileFirst: false, 
     container: {
-        maxWidth: '1050px', 
+        maxWidth: '1560px', 
         fields: '20px' 
     },
     breakPoints: {
         lg: {
             width: '1920px', 
             fields: '20px'
-        },
-        desktop: {
-            width: '1440px',
-            fields: '15px'
         },
         md: {
             width: '1366px',
@@ -29,7 +25,7 @@ var settings = {
 
         },
         tablet: {
-            width: '1024px',
+            width: '992px',
             fields: '15px'
 
         },

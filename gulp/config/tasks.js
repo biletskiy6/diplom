@@ -9,4 +9,5 @@ module.exports = [
 	'./gulp/tasks/svg.js',
 	'./gulp/tasks/fonts.js',
 	'./gulp/tasks/rsync.js',
+	'./gulp/tasks/video.js',
 ];
