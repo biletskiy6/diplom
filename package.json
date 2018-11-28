@@ -39,6 +39,7 @@
     "picturefill": "^3.0.2",
     "slick-carousel": "^1.8.1",
     "svg4everybody": "^2.1.9",
+    "swiper": "^4.4.2",
     "vide": "^0.5.1"
   }
 }

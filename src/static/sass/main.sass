@@ -50,8 +50,7 @@ body.home
 	background-size: cover
 	background-position: center center
 	background-attachment: fixed
-
-
+	overflow: hidden
 	&::after
 		position: absolute
 		content: ''
@@ -65,7 +64,7 @@ body.home
 	z-index: 5
 	background-color: #fff
 	transition: all .35s ease
-	border-bottom: 2px solid #e5e5e5
+	//border-bottom: 2px solid #e5e5e5
 	&--fixed
 		position: fixed
 		top: 0
@@ -215,7 +214,8 @@ body.home
 	padding: 0 10px
 	&__title
 		font-size: 54px
-		letter-spacing: 4.2px
+		text-transform: uppercase
+		//letter-spacing: 4.2px
 		font-family: $OpenSansBold
 		+md-block()
 			font-size: 44px
@@ -235,15 +235,7 @@ body.home
 			font-size: 16px
 		+tablet-block()
 			font-size: 14px
-		&::after
-			position: absolute
-			content: ''
-			left: 50%
-			transform: translateX(-50%)
-			bottom: -20px
-			height: 4px
-			width: 60px
-			background-color: $accent
+
 
 .language-switch
 	display: flex
@@ -280,10 +272,46 @@ body.home
 /*s-about*/
 .s-about
 	position: relative
-	width: 100%
-	min-height: 600px
-	background-color: red
+	padding: 50px 0 
+	background-color: #fff
+	z-index: 1
 /*s-about*/
+/*section-intro*/
+.section-intro
+	position: relative
+	text-align: center
+	h2
+		position: relative
+		font-size: 52px
+		text-transform: uppercase
+		color: $accent
+		font-family: $OpenSansBold
+		letter-spacing: 2.5px
+		display: inline-block
+		&::after, &::before
+			position: absolute
+			content: ''
+			bottom: -20px
+		&::before
+			left: -16%
+			height: 1px
+			background-color: $accent
+			width: 60%
+			opacity: .7
+		&::after
+			right: -16%
+			opacity: .7
+			height: 1px
+			width: 60%
+			background-color: $accent
+	.fa-graduation-cap, .fa-camera-retro
+		position: absolute
+		left: 50%
+		transform: translateX(-50%)
+		color: $accent
+		font-size: 20px
+		bottom: -25px
+/*section-intro*/
 /*search*/
 .search
 	margin-left: auto
@@ -382,9 +410,10 @@ body.home
 		+tablet-block()
 			flex-direction: column
 		.first-line
-			flex: 1
+			flex: 1 1 0%
 			+tablet-block()
 				margin-bottom: 20px
+				flex: none
 		.post
 			position: relative
 			background-color: #fff
@@ -456,9 +485,11 @@ body.home
 .second-line
 	display: flex
 	flex-direction: column
-	flex: 1
+	flex: 1 1 0%
 	margin-left: 20px
 	margin-right: 20px
+	+tablet-block()
+		flex: none
 	+md-block() 
 		margin-right: 0
 	.post
@@ -471,7 +502,9 @@ body.home
 		margin-left: 0
 		margin-right: 0
 .third-line
-	flex: 0.8
+	flex: 0.8 1 0
+	+tablet-block()
+		flex: none
 	+md-block()
 		display: none
 /*posts*/
@@ -481,4 +514,152 @@ body.home
 	100%
 		transform: translate3d(0,0,0)
 		opacity: 1
+/*team*/
+.team-items
+	position: relative
+	margin-top: 70px
+	padding-bottom: 40px
+	&::after
+		position: absolute
+		content: ''
+		top: 50%
+		z-index: -1
+		left: 50%
+		transform: translate(-50%, -50%)
+		height: 70%
+		
+
+		width: 1px
+		background-color: $accent
+		opacity: .5
+	.team-item
+		display: flex
+		justify-content: space-between
+	.team-img
+		position: relative
+		text-align: center
+		flex: 1
+		padding-top: 60px
+		&__wrapper
+			position: relative
+			display: inline-block
+		img
+			flex: none
+			border: 1px solid rgba($accent, .3)
+			margin: 0 auto
+			display: block
+	.team-info
+		flex: 1
+		&__content
+			padding: 50px
+			text-align: center
+			h2
+				position: relative
+				font-family: $OpenSansBold
+				font-size: 40px
+				color: #5d5d5d
+				&::after
+					position: absolute
+					content: ''
+					bottom: -20px
+					left: 50%
+					transform: translateX(-50%)
+					height: 1px
+					width: 20%
+					opacity: .5
+					background-color: $accent
+		&__proffesion
+			margin-top: 40px
+			color: #a9a9a9
+			font-size: 30px
+		&__about
+			margin-top: 10px
+			color: #333
+			opacity: .9
+.slick-prev, .slick-next
+	width: 50px
+	height: 51px
+	display: flex
+	align-items: center
+	justify-content: center
+	z-index: 1
+	transition: background-color .25s ease, color .25s ease
+	&:hover
+		background-color: $accent
+		transition: background-color .25s ease, color .25s ease
+		&::before, &::after
+			color: #fff
+			transition: color .25s ease
+	&::before, &::after
+	  font-family: "Font Awesome 5 Pro"
+	  font-size: 32px
+	  color: $accent
+	  z-index: 1
+	  opacity: 1
+
+.slick-prev
+	&::before
+		content: "\f053"
+.slick-next
+	&::before
+		content: "\f054"
+.slick-slide:focus, a
+	outline: none
+.slick-dots
+	bottom: -45px
+.slick-list
+	padding-bottom: 20px
+.slick-dots li
+	margin: 0
+.slick-dots li button:before 
+	font-size: 27px
+.img-border
+	position: absolute
+	border: 1px solid $accent
+	width: 60px
+	height: 60px
+	&--left
+		top: -15px
+		left: -15px
+		border-right: transparent
+		border-bottom: transparent
+	&--right
+		top: -15px
+		right: -15px
+		border-left: transparent
+		border-bottom: transparent
+	&--bottomL
+		bottom: -15px
+		left: -15px
+		border-top: transparent
+		border-right: transparent
+	&--bottomR
+		bottom: -15px
+		right: -15px
+		border-left: transparent
+		border-top: transparent
+
+/*team*/
+
+/*scroll-line*/
+.scroll-line
+	width: 0%
+	height: 2px
+	background-color: $accent
+/*scroll-line*/
+
+/*swiper*/
+.swiper-container
+	width: 100%
+	padding-top: 50px
+	padding-bottom: 50px
+	margin-top: 50px
+.swiper-slide
+	background-position: center center
+	background-size: cover
+	width: 400px
+	height: 300px
+.swiper-pagination-bullet-active
+	background-color: $accent
+/*swiper*/
 @import "media"
