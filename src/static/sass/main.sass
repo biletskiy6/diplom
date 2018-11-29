@@ -40,6 +40,15 @@ body.home
 	+md-block()
 		max-width: 1150px
 
+/*section-default*/
+.section
+	position: relative
+	padding: 80px 0 0
+	&--gallery
+		padding-bottom: 100px
+/*section-default*/
+
+
 /*HEADER*/
 .main-header
 	position: relative
@@ -261,6 +270,8 @@ body.home
 	position: relative
 #google-container
 	height: 600px
+	+md-block()
+		height: 500px
 .contacts-triangle
 	position: absolute
 	top: 0
@@ -268,11 +279,11 @@ body.home
 	width: 100%
 	height: 120px
 	transform: rotate(180deg)
+	+md-block()
+		height: 80px
 /*GOOGLE MAP*/
 /*s-about*/
 .s-about
-	position: relative
-	padding: 50px 0 
 	background-color: #fff
 	z-index: 1
 /*s-about*/
@@ -310,7 +321,7 @@ body.home
 		transform: translateX(-50%)
 		color: $accent
 		font-size: 20px
-		bottom: -25px
+		bottom: -28px
 /*section-intro*/
 /*search*/
 .search
@@ -421,6 +432,10 @@ body.home
 			height: 100%
 			display: flex
 			flex-direction: column
+			transition: transform .4s ease
+			&:hover
+				transform: scale(1.02)
+				transition: transform .4s ease
 			+tablet-block()
 				width: 70%
 				margin: 0 auto
@@ -517,7 +532,7 @@ body.home
 /*team*/
 .team-items
 	position: relative
-	margin-top: 70px
+	margin-top: 35px
 	padding-bottom: 40px
 	&::after
 		position: absolute
@@ -576,6 +591,7 @@ body.home
 			margin-top: 10px
 			color: #333
 			opacity: .9
+			text-align: justify
 .slick-prev, .slick-next
 	width: 50px
 	height: 51px
@@ -606,13 +622,27 @@ body.home
 .slick-slide:focus, a
 	outline: none
 .slick-dots
-	bottom: -45px
+	bottom: 20px
 .slick-list
 	padding-bottom: 20px
 .slick-dots li
 	margin: 0
 .slick-dots li button:before 
 	font-size: 27px
+	background: transparent 
+	opacity: .35
+	transition: color .25s ease
+	color: none
+
+
+.slick-dots li button:hover
+	&::before
+		color: $accent
+		transition: color .25s ease
+	
+.slick-dots li.slick-active button::before
+	color: $accent
+	opacity: 1
 .img-border
 	position: absolute
 	border: 1px solid $accent
@@ -651,15 +681,60 @@ body.home
 /*swiper*/
 .swiper-container
 	width: 100%
-	padding-top: 50px
 	padding-bottom: 50px
-	margin-top: 50px
+	margin-top: 70px
 .swiper-slide
 	background-position: center center
 	background-size: cover
 	width: 400px
 	height: 300px
+	filter: blur(4px)
+	transition: filter .25s ease
+	+md-block()
+		width: 350px
+		height: 250px
+	&-prev
+		filter: blur(2px)
+		transition: filter .25s ease
+	&-next
+		filter: blur(2px)
+		transition: filter .25s ease
+	&-active
+		filter: none
+		transition: filter .25s ease
 .swiper-pagination-bullet-active
 	background-color: $accent
 /*swiper*/
+/*swiper-pagination-bullet*/
+.swiper-pagination-bullet
+	width: 6px
+	height: 6px
+.swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet
+	margin: 0 4px
+.swiper-pagination
+	&--hidden
+		display: none 
+/*swiper-pagination-bullet*/
+
+/*top-button*/
+.to-top
+	position: fixed
+	right: -9999px
+	background-color: $accent
+	border-radius: 50%
+	padding: 0
+	width: 50px
+	height: 50px
+	z-index: 10
+	border: none
+	cursor: pointer
+	transition: right .45s ease-in-out
+	&--active
+		right: 40px
+		bottom: 20px
+		transition: right .45s ease-in-out
+	.far
+		color: #fff
+		font-size: 30px
+/*top-button*/
 @import "media"
