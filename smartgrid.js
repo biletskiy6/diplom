@@ -11,7 +11,7 @@ var settings = {
     },
     breakPoints: {
         lg: {
-            width: '1920px', 
+            width: '1680px', 
             fields: '20px'
         },
         md: {
@@ -20,7 +20,7 @@ var settings = {
 
         },
         mdx: {
-            width: '1280px',
+            width: '1200px',
             fields: '15px'
 
         },
@@ -34,15 +34,14 @@ var settings = {
             fields: '15px'
 
         },
+        phoneh: {
+            width: '576px',
+            fields: '15px'
+        },
         phone: {
             width: '480px',
-            fields: '10px'
+            fields: '15px'
         },
-        iphone: {
-            width: '320px',
-            fields: '10px'
-        }
-
     }
 };
 

@@ -37,6 +37,7 @@
     "jquery": "^3.3.1",
     "normalize.css": "^8.0.0",
     "picturefill": "^3.0.2",
+    "simplebar": "^3.1.0",
     "slick-carousel": "^1.8.1",
     "svg4everybody": "^2.1.9",
     "swiper": "^4.4.2",

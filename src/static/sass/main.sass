@@ -8,7 +8,6 @@
 
 ::placeholder
 	color: #666
-
 ::selection
 	background-color: $accent
 	color: #fff
@@ -21,6 +20,24 @@ html
 	*, *:before, *:after
 		box-sizing: inherit
 
+a, a:focus
+	outline: none
+button:focus
+	outline: none
+body.shadow
+	&::after
+		position: fixed
+		content: ''
+		width: 100%
+		height: 100%
+		transition: all .35s ease
+		top: 0
+		left: 0
+		right: 0
+		bottom: 0
+		background-color: rgba(#000, .5)
+		opacity: .5
+		z-index: 1
 body.home
 	font-size: 16px
 	min-width: 320px
@@ -37,8 +54,6 @@ body.home
 +reset()
 .container
 	+wrapper()
-	+md-block()
-		max-width: 1150px
 
 /*section-default*/
 .section
@@ -47,7 +62,59 @@ body.home
 	&--gallery
 		padding-bottom: 100px
 /*section-default*/
+/* Preloader */
+.preloader
+	position: fixed
+	left: 0
+	top: 0
+	bottom: 0
+	right: 0
+	z-index: 9999
+	background-color: $accent
+	&__spinner
+		position: absolute
+		top: 50%
+		left: 50%
+		transform: translate(-50%, -50%)
+		width: 150px
+		height: 150px
+	&__percents
+		position: absolute
+		top: 50%
+		left: 50%
+		transform: translate(-50%, -50%)
+		color: #fff
+		font-size: 20px
+	&__animation
+		width: 150px
+		height: 150px
+		position: relative
+		animation: spin 2s linear infinite 
+		&, &::before, &::after
+			content: ''
+			position: absolute 		
+			border: 3px solid transparent
+			border-top-color: #fff
+			border-radius: 50%
+		&::before
+			top: 13px
+			bottom: 13px
+			right: 13px
+			left: 13px
+			animation: spin 1.5s linear infinite 
+		&::after
+			top: 5px
+			bottom: 5px
+			right: 5px
+			left: 5px
+			animation: spin 3s linear infinite 
+@keyframes spin
+  0%
+    transform: rotate(0deg)
+  100%
+    transform: rotate(360deg)
 
+/* Preloader */
 
 /*HEADER*/
 .main-header
@@ -158,6 +225,8 @@ body.home
 			animation-delay: .4s
 		.main-menu li:nth-child(4) a
 			animation-delay: .5s
+		.main-menu li:nth-child(5) a
+			animation-delay: .6s
 .main-navigation
 	width: 100%
 .main-menu
@@ -170,7 +239,7 @@ body.home
 	a
 		display: block
 		color: #000
-		font-size: 42px
+		font-size: 40px
 		transition: transform .25s ease
 		opacity: 0
 		text-decoration: none
@@ -179,6 +248,9 @@ body.home
 		+md-block()
 			font-size: 36px
 		+tablet-block()
+			font-size: 32px
+		+phoneh-block()
+			font-size: 26px
 		span
 			position: relative
 			transition: color .25s ease
@@ -224,8 +296,9 @@ body.home
 	&__title
 		font-size: 54px
 		text-transform: uppercase
-		//letter-spacing: 4.2px
-		font-family: $OpenSansBold
+		letter-spacing: 4.2px
+		font-family: 'Montserrat', sans-serif
+		font-weight: 700
 		+md-block()
 			font-size: 44px
 			letter-spacing: 3px
@@ -269,7 +342,7 @@ body.home
 .s-contacts
 	position: relative
 #google-container
-	height: 600px
+	height: 500px
 	+md-block()
 		height: 500px
 .contacts-triangle
@@ -277,7 +350,7 @@ body.home
 	top: 0
 	z-index: 1
 	width: 100%
-	height: 120px
+	height: 100px
 	transform: rotate(180deg)
 	+md-block()
 		height: 80px
@@ -291,31 +364,47 @@ body.home
 .section-intro
 	position: relative
 	text-align: center
+	padding-left: 15px
+	padding-right: 15px
 	h2
 		position: relative
-		font-size: 52px
+		font-size: 46px
 		text-transform: uppercase
 		color: $accent
 		font-family: $OpenSansBold
 		letter-spacing: 2.5px
 		display: inline-block
+		+md-block()
+			font-size: 45px
+		+tabletx-block()
+			font-size: 35px
+		+phone-block()
+			font-size: 30px
 		&::after, &::before
 			position: absolute
 			content: ''
 			bottom: -20px
+			width: 55%
+			opacity: .7
+			height: 1px
+			background-color: $accent
+			+tabletx-block()
+				width: 50%
+			+phone-block()
+				width: 32%
 		&::before
-			left: -16%
-			height: 1px
-			background-color: $accent
-			width: 60%
-			opacity: .7
+			left: -12%
+			+tabletx-block()
+				left: -10%
+			+phone-block()
+				left: 5%
 		&::after
-			right: -16%
-			opacity: .7
-			height: 1px
-			width: 60%
-			background-color: $accent
-	.fa-graduation-cap, .fa-camera-retro
+			right: -12%
+			+tabletx-block()
+				right: -10%
+			+phone-block()
+				right: 5%
+	.far
 		position: absolute
 		left: 50%
 		transform: translateX(-50%)
@@ -388,6 +477,15 @@ body.home
 		+placeholder()
 			letter-spacing: 4.5px
 			color: #fff
+		+md-block()
+			font-size: 50px
+		+tablet-block()
+			font-size: 35px
+			padding: 0 100px 5px 30px
+		+phone-block()
+			font-size: 20px
+			+placeholder()
+				color: transparent
 	&__find
 		display: none
 		position: absolute
@@ -409,6 +507,12 @@ body.home
 		&:hover
 			opacity: 1
 			transition: opacity .25s ease
+		+tablet-block()
+			font-size: 14px
+			min-width: 50px
+			min-height: 50px
+		+phone-block()
+			font-size: 12px
 
 /*search-overlay*/
 /*posts*/
@@ -418,10 +522,26 @@ body.home
 	margin-top: 50px
 	&__wrapper
 		display: flex
-		+tablet-block()
+		+mdx-block()
 			flex-direction: column
 		.first-line
-			flex: 1 1 0%
+			flex: 0.5 1 0%
+			.post
+				height: 100%
+				+mdx-block()
+					width: 65%
+					margin: 0 auto
+				+tablet-block()
+					width: 80%
+				+tabletx-block()
+					width: 90%
+				+phone-block()
+					width: 100%
+			+md-block()
+				flex: 0.65 1 0%
+			+mdx-block()
+				margin-bottom: 20px
+				flex: none
 			+tablet-block()
 				margin-bottom: 20px
 				flex: none
@@ -429,20 +549,12 @@ body.home
 			position: relative
 			background-color: #fff
 			border-radius: 4px
-			height: 100%
 			display: flex
 			flex-direction: column
 			transition: transform .4s ease
 			&:hover
 				transform: scale(1.02)
 				transition: transform .4s ease
-			+tablet-block()
-				width: 70%
-				margin: 0 auto
-			+tabletx-block()
-				width: 90%
-			+phone-block()
-				width: 100%
 			a
 				position: relative
 				display: block
@@ -456,9 +568,9 @@ body.home
 					//height: 250px
 					transition: transform .35s ease-in-out
 					&:hover
-						transform: scale(1.2)
+						transform: scale(1.05)
 						transition: transform .35s ease-in-out
-					+tablet-block()
+					+mdx-block()
 						height: 250px
 					+phone-block()
 						height: 180px
@@ -480,6 +592,8 @@ body.home
 					font-size: 26px
 					line-height: 1.2
 					margin-bottom: 10px
+					+md-block()
+						font-size: 24px
 					+phone-block()
 						font-size: 22px
 				p
@@ -497,27 +611,115 @@ body.home
 					color: #333
 					opacity: .8
 					letter-spacing: 0.6px
+.secondary-posts
+	display: flex
+	margin-bottom: 30px
+	+md-block()
+		margin-bottom: 20px
+	+tabletx-block()
+		flex-direction: column
+	.post
+		flex: 1
+		+tabletx-block()
+			width: 90%
+			margin: 0 auto
+			flex: none
+		&:first-child
+			margin-right: 30px
+			//margin-bottom: 20px
+			+md-block()
+				margin-right: 20px
+			+tabletx-block()
+				margin-right: auto
+				margin-bottom: 20px
+		+phone-block()
+			width: 100%
+	.post-content
+		h2
+			font-size: 24px
+			+md-block()
+				font-size: 20px
+.another-posts
+	display: flex
+	+tabletx-block()
+		flex-direction: column
+	.post
+		flex: 1
+		+tabletx-block()
+			width: 90%
+			margin: 0 auto
+			flex: none
+		+phone-block()
+			width: 100%
+	> .post
+		.post-content
+			h2
+				font-size: 24px
+				+md-block()
+					font-size: 20px
+
+.another-posts 
+	.another-wrapper 
+		.post
+			&:first-child
+				margin-bottom: 20px
+.another-wrapper
+	display: flex
+	flex-direction: column
+	margin-left: 30px
+	flex: 1
+	+tabletx-block()
+		margin-top: 20px
+	+md-block()
+		margin-left: 20px
+	+tabletx-block()
+		margin-left: 0
+		flex: none
+	.post-content
+		h2
+			font-size: 22px
+			+md-block()
+				font-size: 20px
+.another-posts
+	.another-wrapper
+		.post
+			width: 100%
+			+tabletx-block()
+				width: 90%
+				margin: 0 auto
+			+phone-block()
+				width: 100%
 .second-line
 	display: flex
 	flex-direction: column
 	flex: 1 1 0%
-	margin-left: 20px
-	margin-right: 20px
-	+tablet-block()
-		flex: none
+	margin-left: 30px
 	+md-block() 
 		margin-right: 0
+		margin-left: 20px
+	+mdx-block()
+		flex: none
+	+tablet-block()
+		flex: none
+
 	.post
 		position: relative
 		&:first-child
-			margin-bottom: 20px
+			//margin-bottom: 20px
 		img
 			height: 180px
 	+tablet-block()
 		margin-left: 0
 		margin-right: 0
 .third-line
-	flex: 0.8 1 0
+	flex: 1 1 0%
+	display: flex
+	flex-direction: column
+	.post
+		&:first-child
+			margin-bottom: 20px
+			img
+				height: 200px
 	+tablet-block()
 		flex: none
 	+md-block()
@@ -542,19 +744,23 @@ body.home
 		left: 50%
 		transform: translate(-50%, -50%)
 		height: 70%
-		
-
 		width: 1px
 		background-color: $accent
 		opacity: .5
+		+tablet-block()
+			content: none
 	.team-item
 		display: flex
 		justify-content: space-between
+		+tablet-block()
+			flex-direction: column
 	.team-img
 		position: relative
 		text-align: center
 		flex: 1
 		padding-top: 60px
+		+tablet-block()
+			flex: none
 		&__wrapper
 			position: relative
 			display: inline-block
@@ -565,14 +771,26 @@ body.home
 			display: block
 	.team-info
 		flex: 1
+		+tablet-block()
+			flex: none
 		&__content
-			padding: 50px
+			padding: 50px 80px 50px 50px
 			text-align: center
+			+tablet-block()
+				padding-left: 30px
+				padding-right: 30px
+			+phone-block()
+				padding-left: 10px
+				padding-right: 10px
 			h2
 				position: relative
 				font-family: $OpenSansBold
 				font-size: 40px
 				color: #5d5d5d
+				+md-block()
+					font-size: 35px
+				+mdx-block()
+					font-size: 30px
 				&::after
 					position: absolute
 					content: ''
@@ -583,23 +801,36 @@ body.home
 					width: 20%
 					opacity: .5
 					background-color: $accent
+					+md-block()
+						bottom: -20px
+					+mdx-block()
+						bottom: -15px
+
 		&__proffesion
 			margin-top: 40px
 			color: #a9a9a9
 			font-size: 30px
+			+md-block()
+				font-size: 26px
+				margin-top: 35px
+			+mdx-block()
+				font-size: 24px
+				margin-top: 30px
 		&__about
-			margin-top: 10px
+			margin-top: 15px
 			color: #333
 			opacity: .9
-			text-align: justify
+			text-align: left
 .slick-prev, .slick-next
 	width: 50px
-	height: 51px
+	height: 50px
 	display: flex
 	align-items: center
 	justify-content: center
 	z-index: 1
 	transition: background-color .25s ease, color .25s ease
+	+phoneh-block()
+		display: none
 	&:hover
 		background-color: $accent
 		transition: background-color .25s ease, color .25s ease
@@ -612,17 +843,28 @@ body.home
 	  color: $accent
 	  z-index: 1
 	  opacity: 1
+	  +phone-block()
+	  	font-size: 25px
 
 .slick-prev
+	+lg-block()
+		left: 15px
+	+phone-block()
+		left: 0
 	&::before
 		content: "\f053"
 .slick-next
+	+lg-block()
+		right: 0
 	&::before
 		content: "\f054"
 .slick-slide:focus, a
 	outline: none
 .slick-dots
 	bottom: 20px
+	+tablet-block()
+		bottom: 70px
+
 .slick-list
 	padding-bottom: 20px
 .slick-dots li
@@ -683,25 +925,33 @@ body.home
 	width: 100%
 	padding-bottom: 50px
 	margin-top: 70px
+.swiper-wrapper
+	display: flex
+	align-items: center
 .swiper-slide
-	background-position: center center
-	background-size: cover
-	width: 400px
-	height: 300px
+	width: 350px
+	height: 200px
+	overflow: hidden
 	filter: blur(4px)
 	transition: filter .25s ease
+	img
+		width: 100%
+		height: 100%
 	+md-block()
 		width: 350px
 		height: 250px
 	&-prev
 		filter: blur(2px)
 		transition: filter .25s ease
+		img
 	&-next
 		filter: blur(2px)
 		transition: filter .25s ease
 	&-active
 		filter: none
 		transition: filter .25s ease
+		width: 400px
+		height: 250px
 .swiper-pagination-bullet-active
 	background-color: $accent
 /*swiper*/
@@ -737,4 +987,166 @@ body.home
 		color: #fff
 		font-size: 30px
 /*top-button*/
+/*footer*/
+
+.footer-menu
+	display: flex
+	text-align: center
+	justify-content: center
+	+tabletx-block()
+		flex-direction: column
+	+phoneh-block()
+		text-align: center
+	li
+		margin-right: 40px
+
+		&:last-child
+			margin-right: 0
+		+tabletx-block()
+			margin-right: 0
+			margin-bottom: 20px
+		+phoneh-block()
+			margin-bottom: 15px
+		a
+			color: #000
+			text-decoration: none
+			text-transform: uppercase
+			font-size: 18px
+			letter-spacing: 1.2px
+			transition: color .5s ease, opacity 5s ease
+			display: block
+			&:hover
+				color: $accent
+			+tablet-block()
+				font-size: 16px
+			+phoneh-block()
+				font-size: 14px
+.footer-navigation
+	+tabletx-block()
+		flex: 1
+
+.newsletter
+	display: flex
+	align-items: center
+	justify-content: center
+	margin-top: 30px
+	+tabletx-block()
+		flex-direction: column
+		margin-top: 0
+		flex: 1
+	&__label
+		font-size: 18px
+		margin-right: 35px
+		+tablet-block()
+			font-size: 16px
+		+tabletx-block()
+			margin-right: 0
+			margin-bottom: 20px
+	&-form
+		position: relative
+		display: flex
+		width: 32%
+		&__input
+			font-size: 16px
+			//border-radius: 5px
+			width: 100%
+			color: #999
+			outline: none
+			border: none
+			border-bottom: 1px solid $accent
+			padding: 10px 150px 18px 10px
+			transition: border-color .25s ease
+			&:focus
+				border-color: $accent
+				transition: border-color .25s ease
+			+placeholder()
+				opacity: 1
+				color: #999
+		&__submit
+			position: absolute
+			right: 0
+			top: 7px
+			cursor: pointer
+			background-color: transparent
+			border: none
+			outline: none
+			color: $accent
+			opacity: 1
+			padding: 7px 15px
+			border-radius: 5px
+			letter-spacing: 1px
+			flex: none
+			text-transform: uppercase
+			font-size: 14px
+			transition: background-color .25s ease
+			&:hover
+				background-color: $accent
+				transition: background-color .25s ease
+				color: #fff
+			&:focus
+				outline: none
+			+tabletx-block()
+				padding: 15px 10px
+			+phoneh-block()
+				font-size: 14px
+/*footer*/
+/*s-newslatter*/
+.s-newslatter
+	&__info
+		margin-top: 60px
+		text-align: center
+		p
+			color: #333
+			font-family: "Montserrat", sans-serif
+			font-weight: 400
+			max-width: 40%
+			margin: 0 auto
+			letter-spacing: 1.1px
+/*s-newslatter*/
+.main-footer
+	padding-bottom: 50px
+	font-family: "Montserrat", sans-serif
+	font-weight: 500
+	margin-top: 50px
+	&__wrapper
+		+row-flex()
+		.copyrights
+			+col()
+			+size(3)
+			a
+				text-decoration: none
+				img
+					width: 135px
+		.latests
+			+col()
+			+size(5)
+			&__header
+				margin-bottom: 10px
+			&__news
+				padding: 0 15px
+				li
+					margin-bottom: 10px
+					a
+						text-decoration: none
+						color: inherit
+		.contacts
+			+col()
+			+size(4)
+
+.address
+	li
+		a
+			text-decoration: none
+			color: inherit
+			&:hover
+				color: $accent
+.phone
+	text-decoration: none
+	color: inherit
+	font-size: 25px
+	transition: color .25s ease
+	&:hover
+		color: $accent
+		transition: color .25s ease
+
 @import "media"
