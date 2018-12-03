@@ -297,8 +297,7 @@ body.home
 		font-size: 54px
 		text-transform: uppercase
 		letter-spacing: 4.2px
-		font-family: 'Montserrat', sans-serif
-		font-weight: 700
+		font-family: $MontserratBold
 		+md-block()
 			font-size: 44px
 			letter-spacing: 3px
@@ -371,7 +370,7 @@ body.home
 		font-size: 46px
 		text-transform: uppercase
 		color: $accent
-		font-family: $OpenSansBold
+		font-family: $MontserratBold
 		letter-spacing: 2.5px
 		display: inline-block
 		+md-block()
@@ -477,6 +476,7 @@ body.home
 		+placeholder()
 			letter-spacing: 4.5px
 			color: #fff
+			opacity: 1
 		+md-block()
 			font-size: 50px
 		+tablet-block()
@@ -588,7 +588,7 @@ body.home
 						color: $accent
 						transition: color .25s ease
 				h2
-					font-family: $OpenSansBold
+					font-family: $MontserratBold
 					font-size: 26px
 					line-height: 1.2
 					margin-bottom: 10px
@@ -784,7 +784,7 @@ body.home
 				padding-right: 10px
 			h2
 				position: relative
-				font-family: $OpenSansBold
+				font-family: $MontserratBold
 				font-size: 40px
 				color: #5d5d5d
 				+md-block()
@@ -1092,21 +1092,20 @@ body.home
 /*footer*/
 /*s-newslatter*/
 .s-newslatter
+	position: relative
+	padding-bottom: 80px
 	&__info
 		margin-top: 60px
 		text-align: center
 		p
 			color: #333
-			font-family: "Montserrat", sans-serif
-			font-weight: 400
 			max-width: 40%
 			margin: 0 auto
 			letter-spacing: 1.1px
 /*s-newslatter*/
 .main-footer
 	padding-bottom: 50px
-	font-family: "Montserrat", sans-serif
-	font-weight: 500
+	//font-family: $MontserratMedium
 	margin-top: 50px
 	&__wrapper
 		+row-flex()
@@ -1117,24 +1116,47 @@ body.home
 				text-decoration: none
 				img
 					width: 135px
+			p
+
 		.latests
 			+col()
 			+size(5)
-			&__header
-				margin-bottom: 10px
 			&__news
 				padding: 0 15px
 				li
+					display: flex
+					align-items: center
 					margin-bottom: 10px
+					&:last-child
+						margin-bottom: 0
+					.far
+						margin-right: 10px
+						font-size: 12px
+						vertical-align: middle
 					a
 						text-decoration: none
 						color: inherit
+						display: block
+						transition: color .25s ease
+						&:hover
+							color: $accent
+							transition: color .25s ease
 		.contacts
 			+col()
 			+size(4)
 
+.footer-header
+	font-family: $MontserratBold
+	margin-bottom: 15px
 .address
 	li
+		display: flex
+		align-items: center
+		margin-bottom: 10px
+		&:last-child
+			margin-bottom: 0
+		.far
+			margin-right: 10px
 		a
 			text-decoration: none
 			color: inherit
@@ -1145,6 +1167,9 @@ body.home
 	color: inherit
 	font-size: 25px
 	transition: color .25s ease
+	display: inline-block
+	&--footer
+		margin-bottom: 15px
 	&:hover
 		color: $accent
 		transition: color .25s ease
