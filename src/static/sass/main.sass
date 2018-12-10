@@ -24,6 +24,8 @@ a, a:focus
 	outline: none
 button:focus
 	outline: none
+body.posts
+	background-color: #f4f4f4
 body.shadow
 	&::after
 		position: fixed
@@ -43,6 +45,8 @@ body.home
 	min-width: 320px
 	position: relative
 	line-height: 1.65
+	display: flex
+	flex-direction: column
 	font-family: $default-font
 	overflow-x: hidden
 	input, textarea
@@ -52,8 +56,44 @@ body.home
 			&:required:valid
 				border-color: green
 +reset()
+.post-hover
+	position: relative
+	&::after
+		position: absolute
+		width: 100%
+		height: 100%
+		content: ''
+		opacity: 0
+		transition: opacity .25s ease
+		background-color: rgba(#000, .6)
+		top: 0
+		left: 0
+		right: 0
+		bottom: 0
+		z-index: 1
+	&:hover
+		&::after
+			opacity: 1
+			transition: opacity .25s ease
+		i
+			opacity: 1
+			transition: opacity .25s ease
+	i
+		position: absolute
+		top: 50%
+		left: 50%
+		transform: translate(-50%, -50%)
+		font-size: 30px
+		transition: opacity .25s ease
+		color: #fff
+		opacity: 0
+		z-index: 2
 .container
 	+wrapper()
+.main
+	flex: 1 0 auto
+	&__wrapper
+		border-bottom: 1px solid rgba(0,0,0,.15)
 
 /*section-default*/
 .section
@@ -126,7 +166,6 @@ body.home
 	background-size: cover
 	background-position: center center
 	background-attachment: fixed
-	overflow: hidden
 	&::after
 		position: absolute
 		content: ''
@@ -135,6 +174,11 @@ body.home
 		height: 100%
 		top: 0
 		left: 0
+	&--posts
+		background-image: none
+		padding-bottom: 30px
+		&::after
+			content: none
 .top-line
 	position: relative
 	z-index: 5
@@ -150,6 +194,8 @@ body.home
 			img
 				width: 100px
 				transition: all .35s ease
+	&--posts
+		//background-color: #fafafa
 .top-llne__wrapper
 	display: flex
 	justify-content: space-between
@@ -233,7 +279,7 @@ body.home
 	width: 100%
 	text-align: center
 	li
-		margin: 50px 0
+		margin: 45px 0
 		+tablet-block()
 			margin: 35px 0
 	a
@@ -343,7 +389,7 @@ body.home
 #google-container
 	height: 500px
 	+md-block()
-		height: 500px
+		height: 400px
 .contacts-triangle
 	position: absolute
 	top: 0
@@ -352,7 +398,9 @@ body.home
 	height: 100px
 	transform: rotate(180deg)
 	+md-block()
-		height: 80px
+		height: 70px
+	+tablet-block()
+		height: 60px
 /*GOOGLE MAP*/
 /*s-about*/
 .s-about
@@ -414,7 +462,7 @@ body.home
 /*search*/
 .search
 	margin-left: auto
-	margin-right: 25px
+	margin-right: 40px
 	a
 		text-decoration: none
 		display: block
@@ -566,10 +614,6 @@ body.home
 					display: block
 					width: 100%
 					//height: 250px
-					transition: transform .35s ease-in-out
-					&:hover
-						transform: scale(1.05)
-						transition: transform .35s ease-in-out
 					+mdx-block()
 						height: 250px
 					+phone-block()
@@ -929,11 +973,21 @@ body.home
 	display: flex
 	align-items: center
 .swiper-slide
+	position: relative
 	width: 350px
 	height: 200px
 	overflow: hidden
-	filter: blur(4px)
-	transition: filter .25s ease
+	//filter: blur(4px)
+	//transition: all .25s ease
+	&::after
+		position: absolute
+		content: ''
+		width: 100%
+		height: 100%
+		top: 0
+		left: 0
+		background-color: rgba(#000, .6)
+		z-index: 1
 	img
 		width: 100%
 		height: 100%
@@ -941,17 +995,33 @@ body.home
 		width: 350px
 		height: 250px
 	&-prev
-		filter: blur(2px)
-		transition: filter .25s ease
-		img
+		//transition: all .25s ease
+		&::after
+			position: absolute
+			content: ''
+			width: 100%
+			height: 100%
+			top: 0
+			left: 0
+			background-color: rgba(#000, .4)
+			z-index: 1
 	&-next
-		filter: blur(2px)
-		transition: filter .25s ease
+		//transition: all .25s ease
+		&::after
+			position: absolute
+			content: ''
+			width: 100%
+			height: 100%
+			top: 0
+			left: 0
+			background-color: rgba(#000, .4)
+			z-index: 1
 	&-active
-		filter: none
-		transition: filter .25s ease
+		//transition: all .25s ease
 		width: 400px
 		height: 250px
+		&::after
+			content: none
 .swiper-pagination-bullet-active
 	background-color: $accent
 /*swiper*/
@@ -1030,10 +1100,6 @@ body.home
 	align-items: center
 	justify-content: center
 	margin-top: 30px
-	+tabletx-block()
-		flex-direction: column
-		margin-top: 0
-		flex: 1
 	&__label
 		font-size: 18px
 		margin-right: 35px
@@ -1045,7 +1111,17 @@ body.home
 	&-form
 		position: relative
 		display: flex
-		width: 32%
+		width: 35%
+		+md-block()
+			width: 45%
+		+tablet-block()
+			width: 55%
+		+tabletx-block()
+			width: 65%
+		+phoneh-block()
+			width: 80%
+		+phone-block()
+			width: 100%
 		&__input
 			font-size: 16px
 			//border-radius: 5px
@@ -1062,6 +1138,8 @@ body.home
 			+placeholder()
 				opacity: 1
 				color: #999
+			+phone-block()
+				padding: 10px
 		&__submit
 			position: absolute
 			right: 0
@@ -1085,10 +1163,10 @@ body.home
 				color: #fff
 			&:focus
 				outline: none
-			+tabletx-block()
-				padding: 15px 10px
 			+phoneh-block()
 				font-size: 14px
+			+phone-block()
+				top: 100%
 /*footer*/
 /*s-newslatter*/
 .s-newslatter
@@ -1102,25 +1180,68 @@ body.home
 			max-width: 40%
 			margin: 0 auto
 			letter-spacing: 1.1px
+			+tablet-block()
+				max-width: 50%
+			+tabletx-block()
+				max-width: 65%
+			+phoneh-block()
+				max-width: 70%
+			+phone-block()
+				max-width: 100%
 /*s-newslatter*/
 .main-footer
-	padding-bottom: 50px
-	//font-family: $MontserratMedium
 	margin-top: 50px
+	padding-bottom: 20px
+	&--posts
+		padding-top: 20px
+		background-color: rgba(#000, .88)
+		.footer-header
+			color: #fff
+			opacity: .9
+		.copyrights, .latests, .contacts
 	&__wrapper
 		+row-flex()
+		+tablet-block()
+			justify-content: center
 		.copyrights
 			+col()
 			+size(3)
+			+tablet-block()
+				+size(12)
+				order: 3
+				text-align: center
+				margin-top: 30px
 			a
 				text-decoration: none
 				img
 					width: 135px
+			&--grey
+				p
+					color: #fff
+					opacity: .7
 			p
-
 		.latests
 			+col()
 			+size(5)
+			+tablet-block()
+				+size(6)
+			+tabletx-block()
+				+size(12)
+				margin-bottom: 20px
+			&--grey
+				ul
+					li
+						.far
+							color: #fff
+							opacity: .7
+						a
+							color: #fff
+							opacity: .7
+							transition: opacity .25s ease
+							&:hover
+								color: #fff
+								opacity: 1
+								transition: opacity .25s ease
 			&__news
 				padding: 0 15px
 				li
@@ -1144,10 +1265,36 @@ body.home
 		.contacts
 			+col()
 			+size(4)
+			+tablet-block()
+				+size(6)
+			+tabletx-block()
+				+size(12)
+			&--grey
+				.phone
+					color: #fff
+					opacity: .7
+					transition: opacity .25s ease
+					&:hover
+						opacity: 1
+						transition: opacity .25s ease
+				.address
+					color: #fff
+					opacity: .7
+					a
+						opacity: .7
+						transition: opacity .25s ease
+						&:hover
+							opacity: 1
+							color: #fff
+							transition: opacity .25s ease
+
+
 
 .footer-header
 	font-family: $MontserratBold
 	margin-bottom: 15px
+	+tabletx-block()
+		margin-bottom: 5px
 .address
 	li
 		display: flex
@@ -1174,4 +1321,155 @@ body.home
 		color: $accent
 		transition: color .25s ease
 
+
+/*=========POST============*/
+.main .post-wrapper .post--size p 
+	font-size: 24px
+.post-wrapper
+	position: relative
+	max-width: 760px
+	margin: 0 auto
+	.post
+		p
+			font-size: 20px
+			line-height: 1.58
+			letter-spacing: -0.06px
+			margin-bottom: 30px
+.post-header
+	position: relative
+	font-family: $MontserratBold
+	text-align: center
+	font-size: 56px
+	line-height: 64px
+	margin-bottom: 60px
+	+tablet-block()
+		font-size: 46px
+		margin-bottom: 50px
+	+tabletx-block()
+		font-size: 40px
+		line-height: 60px
+		margin-bottom: 40px
+	+phoneh-block()
+		font-size: 35px
+		line-height: 55px
+	+phone-block()
+		line-height: 50px
+		margin-bottom: 30px
+
+
+.letters 
+	display: flex
+	align-items: center
+	li
+		margin-right: 5px
+		&.current-letter
+			a
+				position: relative
+				font-size: 20px
+				transition: font-size .25s ease
+				z-index: 1
+				opacity: 1
+				text-decoration: underline
+				&::after
+		
+
+		a
+			text-decoration: none
+			color: inherit
+			font-size: 20px
+			display: block
+			padding: 7px
+			opacity: .5
+			transition: font-size .25s ease
+			font-family: $MontserratBold
+		&.more-size
+			a
+				font-size: 30px
+		&:last-child
+			margin-right: 0
+/*=========POST============*/
+/*next-post*/
+.dot-separator
+	width: 3px
+	height: 3px
+	display: block
+	//display: inline-block
+	//vertical-align: middle
+	border-radius: 50%
+	background-color: #333
+.next-post
+	+row-flex()
+	+tablet-block()
+		flex-direction: column
+		justify-content: center
+		align-items: center
+	&__info
+		+col()
+		+size(6)
+		padding-top: 40px
+		padding-left: 20px
+		a
+			text-decoration: none
+			color: inherit
+		+tablet-block()
+			+size(10)
+			padding-left: 0
+		+tabletx-block()
+			+size(12)
+			padding-top: 20px
+	.date
+		display: flex
+		align-items: center
+		margin-top: 20px
+		li
+			font-size: 12px
+			margin-right: 5px
+
+
+	&__title
+		font-family: $MontserratBold
+		font-size: 40px
+		line-height: 49px
+		margin-bottom: 15px
+		+tablet-block()
+			font-size: 35px
+			line-height: 45px
+		+tabletx-block()
+			font-size: 30px
+			line-height: 40px
+		+phoneh-block()
+			font-size: 28px
+	&__content
+		max-height: 84px
+		overflow: hidden
+		color: #777
+	&__img
+		padding-top: 20px
+		text-align: center
+		+col()
+		+size(6)
+		a
+			display: inline-block
+			img
+				display: block
+				width: 530px
+				height: 350px
+		+tablet-block()
+			+size(7)
+		+tabletx-block()
+			display: none
+.read-next
+	font-size: 12px
+	text-transform: uppercase
+	color: $accent
+	font-family: $MontserratBold
+	margin-bottom: 10px
+.change-size
+	display: flex
+	align-items: center
+	margin-bottom: 15px
+	&__title
+		display: inline-block
+		margin-right: 15px
+/*next-post*/
 @import "media"

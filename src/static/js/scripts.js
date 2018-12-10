@@ -59,17 +59,8 @@ $(function(){
 	svg4everybody();
   preloader.init();
 
-	//getVideVideo();
 
-  var swiperWrapper = document.querySelector(".swiper-container .swiper-wrapper");
-  var swiperPagination = document.querySelector(".swiper-pagination");
-  var counter = 0;
-  for(var i = 0; i < swiperWrapper.children.length; i++) {
-    counter++;
-    if(counter > 12) {
-      swiperPagination.classList.add("swiper-pagination--hidden");
-    }
-  }
+
 
   $(".to-top").on("click", function(e) {
     e.preventDefault();
@@ -85,22 +76,7 @@ $(function(){
     $("body").toggleClass("shadow");
   });
 
-  $(".team-items").slick({
-    arrows: true,
-    dots: true,
-    fade: true,
-    cssEase: 'linear',
-    lazyLoad: 'ondemand',
-    lazyLoadBuffer: 0,
-    responsive: [
-    {
-      breakpoint: 993,
-      settings: {
-        fade: false,
-      }
-    },
-    ]
-  });
+  
   $(".main-menu li a").on("click", function() {
     $(".menu").removeClass("menu--active");
     $(".toggle-menu").removeClass("toggle-menu--active");
@@ -131,24 +107,82 @@ $(function(){
      $(".form-search__find").fadeOut();
    }
  });
-  var swiper = new Swiper('.swiper-container', {
-    effect: 'coverflow',
-    grabCursor: true,
-    centeredSlides: true,
-    slidesPerView: 'auto',
-    loop: true,
-    coverflowEffect: {
-      rotate: 50,
-      stretch: 0,
-      depth: 100,
-      modifier: 1,
-      slideShadows : true,
-    },
-    pagination: {
-      el: '.swiper-pagination',
-    },
-  });
+  swiperInit();
+  slickInit();
+  fontSizeToggle();
 });
+
+
+
+function fontSizeToggle() {
+  var letters = $(".letters li a");
+
+  if(letters) {
+    letters.on("click", function(e) {
+      e.preventDefault();
+      $(".letters li").removeClass("current-letter");
+      $(this).parent().addClass("current-letter");
+      if($(this).parent().hasClass("more-size")){
+       $(".post-wrapper .post").addClass("post--size");
+     } else {
+       $(".post-wrapper .post").removeClass("post--size");
+     }
+   });
+  }
+}
+
+
+function slickInit() {
+  var slickTarget = $(".team-items");
+
+  if(slickTarget) {
+   $(slickTarget).slick({
+    arrows: true,
+    dots: true,
+    fade: true,
+    cssEase: 'linear',
+    lazyLoad: 'ondemand',
+    lazyLoadBuffer: 0,
+    responsive: [
+    {
+      breakpoint: 993,
+      settings: {
+        fade: false,
+      }
+    },
+    ]
+  });
+ }
+ 
+}
+
+
+function swiperInit() {
+
+  var swiperTarget = document.querySelector(".swiper-container");
+  if(swiperTarget) {
+    var swiper = new Swiper(swiperTarget, {
+      effect: 'coverflow',
+      grabCursor: true,
+      centeredSlides: true,
+      slidesPerView: 'auto',
+      loop: true,
+      coverflowEffect: {
+        rotate: 50,
+        stretch: 0,
+        depth: 100,
+        modifier: 1,
+        slideShadows : true,
+      },
+      pagination: {
+        el: '.swiper-pagination',
+      },
+    });
+  }
+  var swiperWrapper = document.querySelector(".swiper-container .swiper-wrapper");
+  var swiperPagination = document.querySelector(".swiper-pagination");
+
+}
 
 
 var parallax = (function(){
@@ -332,15 +366,20 @@ $(window).on('load', function() {
     scrollwheel: false,
     styles: style,
   }
-  var map = new google.maps.Map(document.getElementById('google-container'), map_options);
 
-  var marker = new google.maps.Marker({
-    position: new google.maps.LatLng(latitude, longitude),
-    map: map,
-    visible: true,
-    optimized: false,
-    icon: marker_url
-  });
+  var mapTarget = document.getElementById('google-container');
+
+  if(mapTarget) {
+    var map = new google.maps.Map(mapTarget, map_options);
+    var marker = new google.maps.Marker({
+      position: new google.maps.LatLng(latitude, longitude),
+      map: map,
+      visible: true,
+      optimized: false,
+      icon: marker_url
+    });
+  }
+  
 });
 
 
