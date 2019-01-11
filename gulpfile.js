@@ -38,7 +38,6 @@ $.gulp.task('build', $.gulp.series(
 
 $.gulp.task('default', $.gulp.series(
 	'dev',
-	'sass:qcmq',
 	$.gulp.parallel(
 		'watch',
 		'serve'

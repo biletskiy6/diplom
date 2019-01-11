@@ -45,8 +45,8 @@ body.home
 	min-width: 320px
 	position: relative
 	line-height: 1.65
-	display: flex
-	flex-direction: column
+	//display: flex
+	//flex-direction: column
 	font-family: $default-font
 	overflow-x: hidden
 	input, textarea
@@ -56,6 +56,26 @@ body.home
 			&:required:valid
 				border-color: green
 +reset()
+.button
+	display: inline-block
+	border-radius: 5px
+	padding: 0 5px
+	text-decoration: none
+	color: $accent
+	background-color: #fff
+	border: 1px solid $accent
+	min-width: 250px
+	min-height: 55px
+	line-height: 55px
+	margin: 0 auto
+	text-transform: uppercase
+	font-size: 12px
+	letter-spacing: 1px
+	transition: background-color .25s ease, color .25s ease
+	&:hover
+		background-color: $accent
+		color: #fff
+		transition: background-color .25s ease, color .25s ease
 .post-hover
 	position: relative
 	&::after
@@ -98,9 +118,12 @@ body.home
 /*section-default*/
 .section
 	position: relative
-	padding: 80px 0 0
-	&--gallery
-		padding-bottom: 100px
+	padding: 80px 0
+	+md-block()
+		padding-bottom: 45px
+	+tabletx-block()
+		padding-bottom: 0
+
 /*section-default*/
 /* Preloader */
 .preloader
@@ -154,28 +177,30 @@ body.home
   100%
     transform: rotate(360deg)
 
+
 /* Preloader */
 
 /*HEADER*/
 .main-header
 	position: relative
 	width: 100%
-	padding-bottom: 100px
-	background-image: url('../img/content/bg/main-bg.jpg')
+	min-height: 600px
+	background-image: url('../img/content/bg/bg.jpg')
 	background-repeat: no-repeat
 	background-size: cover
 	background-position: center center
-	background-attachment: fixed
+	//background-attachment: fixed
 	&::after
 		position: absolute
 		content: ''
-		background-color: rgba(#000, 0.45)
+		background-color: rgba(#000, 0.55)
 		width: 100%
 		height: 100%
 		top: 0
 		left: 0
 	&--posts
 		background-image: none
+		min-height: 0
 		padding-bottom: 30px
 		&::after
 			content: none
@@ -201,6 +226,32 @@ body.home
 	justify-content: space-between
 	align-items: center
 	min-height: 50px
+.logos
+	display: flex
+	align-items: center
+	img
+		height: 70px
+		display: block
+		flex: none
+		margin-right: 15px
+.logos
+.logos .euro-img
+	width: 220px
+.logos .bristol-img
+	width: 135px
+	height: 50px
+	position: relative
+	margin-right: 0px
+	opacity: 0.7
+.logos
+	.bristol-img, .chnu-img, .erasmus-img
+		+tabletx-block()
+			display: none
+	.euro-img
+		+phoneh-block()
+			width: 170px
+			height: 50px
+
 .logo
 	text-decoration: none
 	color: #333
@@ -274,51 +325,92 @@ body.home
 		.main-menu li:nth-child(5) a
 			animation-delay: .6s
 .main-navigation
+	position: relative
+	z-index: 1
 	width: 100%
-.main-menu
-	width: 100%
+	&--index
+		margin-bottom: 35px
+	&--active
+		display: flex
+		align-items: center
+		position: fixed
+		top: 0
+		right: 0
+		width: 100%
+		z-index: 999
+		height: 100vh
+		background-color: #fff
+		.main-menu
+			display: block
+			a
+				color: #000
+			&--blue
+				background-color: #fff
+.menu-toggle
+	position: relative
+	z-index: 9998
+	display: none
+	background-color: $accent
 	text-align: center
+	padding: 5px
+	+tablet-block()
+		display: block
+		cursor: pointer
+	&__text
+		font-size: 14px
+		color: #fff
+	&--active
+		position: fixed
+		right: 20px
+		top: 20px
+		border-radius: 4px
+.main-menu
+	display: flex
+	width: 100%
+	justify-content: center
+	text-align: center
+	&--blue
+		background-color: $accent 
+	+tablet-block()
+		display: none
 	li
-		margin: 45px 0
+		//margin-right: 50px
 		+tablet-block()
-			margin: 35px 0
+			margin-bottom: 20px
+		&:last-child
+			margin-right: 0
 	a
 		display: block
-		color: #000
-		font-size: 40px
-		transition: transform .25s ease
-		opacity: 0
+		color: #f1f1f1
+		font-size: 23px
+		opacity: 1
+		letter-spacing: 1.2px
 		text-decoration: none
-		letter-spacing: 2.3px
-		transition: color .5s ease, opacity 5s ease
-		+md-block()
-			font-size: 36px
+		padding: 5px 25px
+		+mdx-block()
+			padding: 5px 20px
+			font-size: 20px
 		+tablet-block()
-			font-size: 32px
 		+phoneh-block()
-			font-size: 26px
 		span
 			position: relative
 			transition: color .25s ease
 			&::before, &::after
 				position: absolute
 				content: ''
-			&::before
+			&::after
 				left: 0
 				bottom: 0
-				transform: scale(0)
 				width: 0%
 				height: 2px
-				background-color: $accent
+				background-color: #fff
+				transition: width .3s ease
 		&:hover
 			span
 				position: relative
-				color: $accent
-				transition: color .25s ease
-				//&::before
-					//transform: scale(1)
-					//width: 100%
-					//transition: width .25s ease
+				&::after
+					width: 100%
+					transition: width .3s ease
 
 /*HEADER*/
 /*FadeInUp*/
@@ -333,31 +425,56 @@ body.home
 	animation-name: fadeInUp
 /*FadeInUp*/
 .intro
+	display: flex
+	align-items: center
 	position: relative
 	z-index: 1
 	text-align: center
 	color: #fff
-	margin-top: 30px
 	padding: 0 10px
-	&__title
-		font-size: 54px
-		text-transform: uppercase
-		letter-spacing: 4.2px
-		font-family: $MontserratBold
-		+md-block()
-			font-size: 44px
-			letter-spacing: 3px
-		+tablet-block()
-			font-size: 36px
+	&-wrapper
+		margin-top: 50px
+	&-text
+		//max-width: 90%
+		padding: 0 10px
+	&-logos
+		flex: none
+		img
+			display: block
+			width: 110px
+			height: 75px
+			margin: 0 auto
+			border-radius: 5px
+			margin-bottom: 10px
+			&:last-child
+				margin-bottom: 0
 		+tabletx-block()
-			font-size: 30px
-		+phone-block()
-			font-size: 27px
+			display: none
+
+	&__logo
+		//flex: none
+		//width: 100px
+		width: 80px
+		margin-right: 20px
+		display: block
+		flex: none
+		border-radius: 50%
+	&__title
+		font-size: 24px
+		text-transform: uppercase
+		letter-spacing: 0px
+		display: inline-block
+		//margin: 0 auto
+		font-family: $MontserratBold
+		+phoneh-block()
+			font-size: 20px
+
 	&__text
 		position: relative
 		font-size: 18px
 		letter-spacing: 0.5px
 		display: inline-block
+		margin-top: 10px
 		+md-block()
 			font-size: 16px
 		+tablet-block()
@@ -366,11 +483,11 @@ body.home
 
 .language-switch
 	display: flex
-	margin-right: 45px
+	//margin-right: 45px
 	+phone-block()
 	li
 		&:nth-child(1)
-			margin-right: 15px
+			margin-right: 20px
 		&.active
 			a
 				transition: opacity .25s ease
@@ -779,7 +896,7 @@ body.home
 .team-items
 	position: relative
 	margin-top: 35px
-	padding-bottom: 40px
+	//padding-bottom: 40px
 	&::after
 		position: absolute
 		content: ''
@@ -873,6 +990,9 @@ body.home
 	justify-content: center
 	z-index: 1
 	transition: background-color .25s ease, color .25s ease
+	+tabletx-block()
+		width: 30px
+		height: 30px
 	+phoneh-block()
 		display: none
 	&:hover
@@ -887,6 +1007,8 @@ body.home
 	  color: $accent
 	  z-index: 1
 	  opacity: 1
+	 	+tabletx-block()
+	 		font-size: 18px
 	  +phone-block()
 	  	font-size: 25px
 
@@ -907,7 +1029,7 @@ body.home
 .slick-dots
 	bottom: 20px
 	+tablet-block()
-		bottom: 70px
+		//bottom: 70px
 
 .slick-list
 	padding-bottom: 20px
@@ -919,7 +1041,8 @@ body.home
 	opacity: .35
 	transition: color .25s ease
 	color: none
-
+.slick-dotted.slick-slider
+	margin-bottom: 0
 
 .slick-dots li button:hover
 	&::before
@@ -970,60 +1093,65 @@ body.home
 	padding-bottom: 50px
 	margin-top: 70px
 .swiper-wrapper
-	display: flex
-	align-items: center
+	+row-flex()
+	+tablet-block()
+		justify-content: center
+.view-more
+	text-align: center
 .swiper-slide
 	position: relative
-	width: 350px
-	height: 200px
-	overflow: hidden
-	//filter: blur(4px)
-	//transition: all .25s ease
-	&::after
-		position: absolute
-		content: ''
-		width: 100%
-		height: 100%
-		top: 0
-		left: 0
-		background-color: rgba(#000, .6)
-		z-index: 1
+	+col()
+	+size(3)
+	background-size: cover
+	background-position: center center
+	margin-bottom: 30px
+	transition: transform .25s ease, background-color .25s ease
+	+mdx-block()
+		+size(4)
+	+tablet-block()
+		+size(5)
+	+tabletx-block()
+		+size(6)
+	+phoneh-block()
+		+size(8)
+	+phone-block()
+		+size(12)
 	img
+		display: block
 		width: 100%
 		height: 100%
-	+md-block()
-		width: 350px
-		height: 250px
-	&-prev
-		//transition: all .25s ease
-		&::after
+	a
+		display: block
+		height: 200px
+		transition: transform .25s ease, background-color .25s ease
+		&::before
 			position: absolute
 			content: ''
 			width: 100%
 			height: 100%
+			background-color: rgba(#000, .45)
+			z-index: 1
 			top: 0
 			left: 0
-			background-color: rgba(#000, .4)
-			z-index: 1
-	&-next
-		//transition: all .25s ease
-		&::after
-			position: absolute
-			content: ''
-			width: 100%
-			height: 100%
-			top: 0
-			left: 0
-			background-color: rgba(#000, .4)
-			z-index: 1
-	&-active
-		//transition: all .25s ease
-		width: 400px
-		height: 250px
-		&::after
-			content: none
+			transition: transform .25s ease
+		&:hover
+			transform: scale(1.05)
+			transition: transform .25s ease, background-color .25s ease
+			&::before
+				background: none
+				transition: transform .25s ease, background-color .25s ease
 .swiper-pagination-bullet-active
 	background-color: $accent
+#lightboxOverlay
+	position: fixed !important
+	top: 0
+	left: 0
+	width: 100% !important
+	height: 100% !important
+#lightbox
+	position: fixed !important
+	top: 50% !important
+	transform: translateY(-50%)
 /*swiper*/
 /*swiper-pagination-bullet*/
 .swiper-pagination-bullet
@@ -1171,7 +1299,7 @@ body.home
 /*s-newslatter*/
 .s-newslatter
 	position: relative
-	padding-bottom: 80px
+	padding-bottom: 50px
 	&__info
 		margin-top: 60px
 		text-align: center
@@ -1188,6 +1316,71 @@ body.home
 				max-width: 70%
 			+phone-block()
 				max-width: 100%
+.socials
+	display: flex
+	justify-content: center
+	margin-top: 30px
+	+phone-block()
+		margin-top: 60px
+	li
+		margin-right: 25px
+		&:last-child
+			margin-right: 0
+		a
+			position: relative
+			display: inline-block
+			text-align: center
+			text-decoration: none
+			width: 45px
+			height: 45px
+			background-color: #f1f1f1
+			border-radius: 30%
+			box-shadow: 0 5px 15px -5px #00000070
+			overflow: hidden
+			+tablet-block()
+				width: 35px
+				height: 35px
+			i
+				line-height: 45px
+				font-size: 16px
+				transition: 0.2s linear
+				opacity: 1
+				color: $accent
+				+tablet-block()
+					line-height: 35px
+					font-size: 14px
+			&:hover
+				i
+					position: relative
+					z-index: 1
+					font-size: 20px
+					color: #fff
+					opacity: 1
+					+tablet-block()
+						font-size: 16px
+				&::before
+					animation: link 0.7s 1 
+					top: -10%
+					left: -10%
+			&::before
+				position: absolute
+				content: ''
+				width: 120%
+				height: 120%
+				background-color: $accent
+				transform: rotate(45deg)
+				left: -110%
+				top: 90%
+@keyframes link
+	0%
+		left: -110%
+		top: 90%
+	50%
+		left: 10%
+		top: -30%
+	100%
+		top: -10%
+		left: -10%
 /*s-newslatter*/
 .main-footer
 	margin-top: 50px
@@ -1339,9 +1532,9 @@ body.home
 	position: relative
 	font-family: $MontserratBold
 	text-align: center
-	font-size: 56px
+	font-size: 46px
 	line-height: 64px
-	margin-bottom: 60px
+	margin-bottom: 45px
 	+tablet-block()
 		font-size: 46px
 		margin-bottom: 50px
@@ -1472,4 +1665,185 @@ body.home
 		display: inline-block
 		margin-right: 15px
 /*next-post*/
+/*posts*/
+.posts-items
+	position: relative
+	z-index: 1
+	margin-top: 40px
+	+row-flex()
+	+tablet-block()
+		justify-content: center
+.post-item
+	+col()
+	+size(4)
+	border-radius: 5px
+	background-color: #fff
+	margin-bottom: 30px
+	transition: transform .15s linear
+	&:hover
+		transform: scale(1.02)
+		transition: transform .15s linear
+	+tablet-block()
+		+size(6)
+	+tabletx-block()
+		+size(10)
+	+phone-block()
+		+size(12)
+	&__content
+		padding: 15px
+	img
+		display: block
+		width: 100%
+		height: 250px
+		+mdx-block()
+			height: 190px
+		+tabletx-block()
+			height: 250px
+	h2
+		color: #000
+		font-family: $MontserratBold
+		font-size: 23px
+		line-height: 1.2
+		margin: 10px 0 15px 0
+		transition: color .25s ease
+		&:hover
+			color: $accent
+			transition: color .25s ease
+	p
+		font-size: 14px
+		color: #333
+		opacity: .9
+		letter-spacing: 0.4px
+	a
+		display: block
+		text-decoration: none
+/*posts*/
+/*pagination*/
+.pagination 
+	display: flex
+	justify-content: center
+	align-items: center
+	margin-bottom: 20px
+	&-list
+		display: flex
+		li
+			display: flex
+			align-items: center
+			margin-right: 10px
+
+			&.pagination-active
+				a
+					background-color: $accent
+					color: #fff
+					border-radius: 10%
+			&.pagination__prev, &.pagination__next
+				background-color: #fff
+				border-radius: 10%
+				padding: 3px 5px
+				i
+					font-size: 18px
+					line-height: 30px
+			a
+				display: block
+				width: 30px
+				height: 30px
+				line-height: 30px
+				text-align: center
+				text-decoration: none
+				color: $accent
+				font-size: 12px
+	&-dots
+		display: inline-block
+		width: 30px
+		height: 30px
+		text-align: center
+/*pagination*/
+/*tabs*/
+.materials
+	&-tabs
+		display: flex
+		+phoneh-block()
+			flex-direction: column
+		li
+			margin-right: 20px
+			+phoneh-block()
+				margin-right: 0
+				margin-bottom: 10px
+			&:last-child
+				margin-right: 0
+			&.materials-active
+				a
+					background-color: $accent
+					color: #fff
+					transition: background-color .25s ease, color .25s ease
+			a
+				display: block
+				padding: 20px 35px
+				background-color: #fff
+				text-decoration: none
+				color: $accent
+				opacity: 1
+				transition: background-color .25s ease, color .25s ease
+				+tabletx-block()
+					padding: 15px 25px
+.tabs
+	&__content
+		display: none
+		margin: 20px 0
+		&.active
+			display: block
+/*tabs*/
+
+
+
+/*ABOUT*/
+
+.about
+	//+row-flex()
+	+tablet-block()
+		+row-flex()
+	&-image
+		float: left
+		margin-right: 30px
+		img
+			display: block
+			height: 715px
+			+mdx-block()
+				height: 650px
+			+tablet-block()
+				height: 400px
+				margin: 0 auto
+		+tablet-block()
+			float: none
+			margin-bottom: 10px
+			+col()
+			+size(12)
+			order: 2
+	&-info
+		+tablet-block()
+			+col()
+			order: 1
+	&-table
+		table
+			//width: 100%
+			border: 1px solid #000
+			border-collapse: collapse
+			th, tr, td
+				border: 1px solid #000
+				padding: 10px
+			+tablet-block()
+				width: 100%
+				margin-bottom: 10px
+	
+	&-intro
+		p
+			margin-bottom: 10px
+			font-family: $MontserratBold
+	&-text
+		p
+			margin-bottom: 15px
+
+
+/*ABOUT*/
+
 @import "media"
